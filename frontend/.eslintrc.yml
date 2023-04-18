@@ -2,7 +2,6 @@ env:
   browser: true
   es2021: true
 extends:
-  - plugin:functional/recommended
   - plugin:react-hooks/recommended
   - plugin:react/recommended
   - airbnb
@@ -13,7 +12,6 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-  - functional
 rules:
   import/extensions: 0
   import/no-unresolved: 0
