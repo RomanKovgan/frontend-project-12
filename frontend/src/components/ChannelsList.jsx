@@ -1,16 +1,95 @@
+/* eslint-disable */
+
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
+import { Plus } from 'react-bootstrap-icons';
+import { actions } from '../slices/index';
+
+const Channel = ({
+  channel, isCurrent, handleRemove, handleRename, handleChoose,
+}) => {
+  const variant = isCurrent ? 'secondary' : null;
+  return (
+    <li key={channel.id} className="nav-item">
+      {channel.removable
+        ? (
+          <Dropdown as={ButtonGroup} className="d-flex">
+            <Button
+              key={channel.id}
+              onClick={handleChoose}
+              variant={variant}
+              type="button"
+            >
+              <span>#</span>
+              {channel.name}
+            </Button>
+            <Dropdown.Toggle split variant={variant}>
+              <span className="visually-hidden">Channel control</span>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleRename(channel.id)}>rename</Dropdown.Item>
+              <Dropdown.Item onClick={handleRemove(channel.id)}>remove</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        ) : (
+          <Button
+            type="button"
+            variant={variant}
+            key={channel.id}
+            onClick={handleChoose}
+          >
+            <span>#</span>
+            {channel.name}
+          </Button>
+        )}
+    </li>
+  );
+};
 
 const ChannelsList = () => {
-  const { channels } = useSelector((state) => state.channelsInfo);
+  const dispatch = useDispatch();
+
+  const { channels, currentChannelsId } = useSelector((state) => state.channelsInfo);
+
+  const handleChooseChannel = (channelId) => () => {
+    dispatch(actions.setCurrentChannel({ channelId }));
+  };
+  const handleAddChannel = () => {
+    dispatch(actions.openModal({ type: 'addChannel'}));
+  };
+  const handleRenameChannel = (channelId) => () => {
+    dispatch(actions.openModal({ type: 'renameChannel', channelId }));
+  };
+  const handleRemoveChannel = (channelId) => () => {
+    dispatch(actions.openModal({ type: 'removeChannel', channelId }));
+  };
   return (
-    <ul className="flex-column">
-      {channels.map((channel) => (
-        <li key={channel.id}>
-          {channel.name}
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className="d-flex justify-content-between">
+        <span>Channels</span>
+        <Button
+          type="button"
+          variant="group-vertical"
+          onClick={handleAddChannel}
+        >
+          <Plus />
+        </Button>
+      </div>
+      <ul className="nav flex-column h-100">
+        {channels.map((channel) => (
+          <Channel
+            key={channel.id}
+            channel={channel}
+            isCurrent={channel.id === currentChannelsId}
+            handleChoose={handleChooseChannel(channel.id)}
+            handleRename={handleRenameChannel}
+            handleRemove={handleRemoveChannel}
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 

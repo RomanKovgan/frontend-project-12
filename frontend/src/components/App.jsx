@@ -8,7 +8,8 @@ import {
 import MainPage from './MainPage';
 import ErrorPage from './ErrorPage';
 import LoginPage from './LoginPage';
-import AuthContext from '../context/index';
+import NavigateBar from './NavigateBar';
+import { AuthContext } from '../context/index';
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,6 +33,7 @@ const App = () => (
   <AuthProvider>
     <Router>
       <div className="d-flex flex-column h-100">
+        <NavigateBar />
         <Routes>
           <Route path="/" element={<MainPage />} errorElement={<ErrorPage />} />
           <Route path="/login" element={<LoginPage />} />

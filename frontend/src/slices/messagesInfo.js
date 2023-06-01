@@ -19,6 +19,11 @@ export const slice = createSlice({
     .addCase(channelsInfoActions.setInitialState, (state, { payload }) => {
       const { messages } = payload;
       state.messages = messages;
+    })
+    .addCase(channelsInfoActions.removeChannel, (state, { payload }) => {
+      const { channelId } = payload;
+      const filtredMessages = state.messages.filter((message) => message.channelId === channelId);
+      state.messages = filtredMessages;
     }),
 });
 

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/RomanKovgan/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.6"
+    "@hexlet/chat-server": "^1.1.6",
+    "socket.io": "^4.6.1"
   }
 }
