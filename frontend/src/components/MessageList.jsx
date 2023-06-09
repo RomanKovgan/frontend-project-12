@@ -5,9 +5,9 @@ import { getCurrentChannel, getMessagesForChannel } from '../slices/selectors';
 
 const Message = ({ username, body }) => (
   <div>
-    <span>{username}</span>
+    <span>{`${username} `}</span>
     :
-    {body}
+    {` ${body}`}
   </div>
 );
 

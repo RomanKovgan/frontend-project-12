@@ -5,7 +5,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuth } from '../hooks/index';
 import routes from '../routes';
@@ -26,9 +26,9 @@ const LoginPage = () => {
 
       try {
         const res = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(res.data));
-        auth.logIn();
-        navigate('/');
+        localStorage.setItem('userId', JSON.stringify(res.data.token));
+        auth.logIn(res.data);
+        navigate('/', { replace: true });
       } catch (err) {
         console.log(err);
         formik.setSubmitting(false);
@@ -86,7 +86,13 @@ const LoginPage = () => {
                 ) : null}
                 <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
               </Form.Group>
-              <Button type="submit" className="mt-3" variant="outline-primary">Submit</Button>
+              <div className=" d-flex justify-content-between ">
+                <Button type="submit" className="mt-3" variant="outline-primary">Submit</Button>
+                <Button type="onClick" className="mt-3" variant="outline-primary">
+                  <Link to="/signup">Registration</Link>
+                </Button>
+              </div>
+
             </fieldset>
           </Form>
         </div>

@@ -6,7 +6,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../hooks/index';
 
@@ -16,39 +16,36 @@ import MessageList from './MessageList';
 import Modal from './Modal/Modal';
 import { actions } from '../slices/index';
 
-const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem('userId'));
-
-  if (userId && userId.token) {
-    return { Authorization: `Bearer ${userId.token}` };
-  }
-
-  return {};
-};
-
 const MainPage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const [fetching, setFetching] = useState(true);
+  const navigate = useNavigate();
 
-  if (!auth.loggedIn) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!auth.user) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   useEffect(() => {
     let didCancel = true;
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
+        const { data } = await axios.get(routes.dataPath(), { headers: auth.getAuthHeader() });
         if (didCancel) setFetching(false);
         dispatch(actions.setInitialState(data));
       } catch (err) {
-        console.error(err);
+        if (!err.isAxiosError) {
+          return;
+        }
+        if (err.response.status === 401) {
+          navigate('/login');
+        }
       }
     };
     fetchData();
     return () => { didCancel = false; };
-  }, [dispatch]);
+  }, [dispatch, auth, navigate]);
+  console.log(fetching);
 
   return fetching ? null : (
     <>

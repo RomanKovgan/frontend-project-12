@@ -2,10 +2,11 @@
 import React, { useRef, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { useApi } from '../hooks/index';
+import { useApi, useAuth } from '../hooks/index';
 
 const NewMessageForm = ({ channel }) => {
   const inputRef = useRef(null);
+  const { user: { username } } = useAuth();
   const api = useApi();
   const f = useFormik({
     initialValues: {
@@ -15,6 +16,7 @@ const NewMessageForm = ({ channel }) => {
       const message = {
         body,
         channelId: channel.id,
+        username,
       };
       try {
         await api.sendMessage(message);
