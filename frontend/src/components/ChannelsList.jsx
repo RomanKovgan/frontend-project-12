@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { Plus } from 'react-bootstrap-icons';
+import { useTranslation } from 'react-i18next';
 import { actions } from '../slices/index';
+
 
 const Channel = ({
   channel, isCurrent, handleRemove, handleRename, handleChoose,
 }) => {
+  const { t } = useTranslation();
   const variant = isCurrent ? 'secondary' : null;
   return (
     <li key={channel.id} className="nav-item">
@@ -26,11 +29,11 @@ const Channel = ({
               {channel.name}
             </Button>
             <Dropdown.Toggle split variant={variant}>
-              <span className="visually-hidden">Channel control</span>
+              <span className="visually-hidden">{t('channels.channelsControl')}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={handleRename(channel.id)}>rename</Dropdown.Item>
-              <Dropdown.Item onClick={handleRemove(channel.id)}>remove</Dropdown.Item>
+              <Dropdown.Item onClick={handleRename(channel.id)}>{t('channels.rename')}</Dropdown.Item>
+              <Dropdown.Item onClick={handleRemove(channel.id)}>{t('channels.remove')}</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         ) : (
@@ -50,6 +53,7 @@ const Channel = ({
 
 const ChannelsList = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { channels, currentChannelsId } = useSelector((state) => state.channelsInfo);
 
@@ -68,7 +72,7 @@ const ChannelsList = () => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <span>Channels</span>
+        <span>{t('channels.channels')}</span>
         <Button
           type="button"
           variant="group-vertical"

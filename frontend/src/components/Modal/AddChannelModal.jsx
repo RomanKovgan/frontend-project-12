@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Modal, Form, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { actions } from '../../slices';
 import { useApi } from '../../hooks/index';
 
@@ -11,6 +12,7 @@ const AddChannelModal = ({ handleClose }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const api = useApi();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -34,12 +36,12 @@ const AddChannelModal = ({ handleClose }) => {
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>Add Channel</Modal.Title>
+        <Modal.Title>{t('addChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Channels name</Form.Label>
+            <Form.Label>{t('channelsName')}</Form.Label>
             <Form.Control
               ref={inputRef}
               onChange={formik.handleChange}
@@ -53,13 +55,13 @@ const AddChannelModal = ({ handleClose }) => {
                 type="button"
                 onClick={handleClose}
               >
-                Cancel
+                {t('cancel')}
               </Button>
               <Button
                 variant="primary"
                 type="submit"
               >
-                Submit
+                {t('submit')}
               </Button>
             </div>
           </Form.Group>

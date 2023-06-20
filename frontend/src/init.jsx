@@ -13,6 +13,13 @@ import { ApiContext } from './context/index';
 const init = async () => {
   const i18n = i18next.createInstance();
 
+  await i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: 'ru',
+    });
+
   const socket = io();
 
   socket.on('newMessage', (payload) => {

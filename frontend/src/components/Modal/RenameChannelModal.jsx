@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useApi } from '../../hooks/index';
 import { getChannelById } from '../../slices/selectors';
+import { useTranslation } from 'react-i18next';
 
 const renameChannelMadal = ({ handleClose }) => {
+  const { t } = useTranslation();
   const inputRef = useRef();
   const api = useApi();
   const channelId = useSelector((state) => state.modal.channelId);
@@ -34,12 +36,12 @@ const renameChannelMadal = ({ handleClose }) => {
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>RenameChannel</Modal.Title>
+        <Modal.Title>{t('modals.renameChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label>RenameForm</Form.Label>
+            <Form.Label>{t('modals.renameForm')}</Form.Label>
             <Form.Control
               name="name"
               id="name"
@@ -53,13 +55,13 @@ const renameChannelMadal = ({ handleClose }) => {
                 type="button"
                 onClick={handleClose}
               >
-                Cancel
+                {t('modals.cancel')}
               </Button>
               <Button
                 variant="primary"
                 type="submit"
               >
-                Submit
+                {t('modals.rename')}
               </Button>
             </div>
           </Form.Group>

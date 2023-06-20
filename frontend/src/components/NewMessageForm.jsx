@@ -2,9 +2,11 @@
 import React, { useRef, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useApi, useAuth } from '../hooks/index';
 
 const NewMessageForm = ({ channel }) => {
+  const { t } = useTranslation();
   const inputRef = useRef(null);
   const { user: { username } } = useAuth();
   const api = useApi();
@@ -41,7 +43,9 @@ const NewMessageForm = ({ channel }) => {
         onChange={f.handleChange}
         value={f.values.body}
       />
-      <Button type="submit" />
+      <Button type="submit">
+        {t('message.submit')}
+      </Button>
 
     </Form>
   );

@@ -4,11 +4,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks';
 import routes from '../routes';
 import { registrationShema } from '../schemas/index';
 
 const Registration = () => {
+  const { t } = useTranslation();
   const auth = useAuth();
   const navigate = useNavigate();
   const inputRef = useRef();
@@ -52,7 +54,7 @@ const Registration = () => {
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
               <Form onSubmit={handleSubmit} className="p-3">
-                <h1 className="text-center mb-4">Registration</h1>
+                <h1 className="text-center mb-4">{ t('registration.registration')}</h1>
                 <Form.Group className="mb-3 form-floating">
                   <Form.Control
                     onChange={handleChange}
@@ -65,7 +67,7 @@ const Registration = () => {
                     isInvalid={(errors.username && touched.username) || signupFailed}
                     required
                   />
-                  <Form.Label htmlFor="username">Username</Form.Label>
+                  <Form.Label htmlFor="username">{ t('registration.username') }</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>{errors.username}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3 form-floating">
@@ -80,7 +82,7 @@ const Registration = () => {
                     isInvalid={(errors.password && touched.password) || signupFailed}
                     required
                   />
-                  <Form.Label htmlFor="password">Password</Form.Label>
+                  <Form.Label htmlFor="password">{ t('registration.password')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>{errors.password}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-floating mb-3">
@@ -95,11 +97,11 @@ const Registration = () => {
                     required
                     isInvalid={(errors.confirmPassword && touched.confirmPassword) || signupFailed}
                   />
-                  <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
+                  <Form.Label htmlFor="confirmPassword">{ t('registration.confirmation') }</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>{errors.confirmPassword}</Form.Control.Feedback>
                 </Form.Group>
                 <Button type="button" variant="primary w-100" onClick={handleSubmit}>
-                  Register
+                  { t('registration.submit') }
                 </Button>
               </Form>
             </div>

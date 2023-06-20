@@ -7,10 +7,12 @@ import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/index';
 import routes from '../routes';
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const [authFailed, setAuthFailed] = useState(false);
   const auth = useAuth();
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ const LoginPage = () => {
           <Form onSubmit={formik.handleSubmit} className="p-3">
             <fieldset disabled={formik.isSubmitting}>
               <Form.Group>
-                <Form.Label htmlFor="username">Username</Form.Label>
+                <Form.Label htmlFor="username">{t('login.username')}</Form.Label>
                 <Form.Control
                   onChange={formik.handleChange}
                   value={formik.values.username}
@@ -69,7 +71,7 @@ const LoginPage = () => {
                 ) : null}
               </Form.Group>
               <Form.Group>
-                <Form.Label htmlFor="password">Password</Form.Label>
+                <Form.Label htmlFor="password">{t('login.password')}</Form.Label>
                 <Form.Control
                   type="password"
                   onChange={formik.handleChange}
@@ -84,12 +86,12 @@ const LoginPage = () => {
                 {formik.touched.password && formik.errors.password ? (
                   <div>{formik.errors.password}</div>
                 ) : null}
-                <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{t('login.error')}</Form.Control.Feedback>
               </Form.Group>
               <div className=" d-flex justify-content-between ">
-                <Button type="submit" className="mt-3" variant="outline-primary">Submit</Button>
+                <Button type="submit" className="mt-3" variant="outline-primary">{t('login.submit')}</Button>
                 <Button type="onClick" className="mt-3" variant="outline-primary">
-                  <Link to="/signup">Registration</Link>
+                  <Link to="/signup">{t('login.registration')}</Link>
                 </Button>
               </div>
 
