@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable functional/no-expression-statements */
 import React, { useEffect, useRef } from 'react';
@@ -5,6 +6,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { actions } from '../../slices';
 import { useApi } from '../../hooks/index';
 
@@ -25,6 +27,7 @@ const AddChannelModal = ({ handleClose }) => {
     onSubmit: async (values) => {
       try {
         handleClose();
+        toast.success(t('modals.created'));
         const { id } = await api.createChannel(values);
         dispatch(actions.setCurrentChannel({ channelId: id }));
       } catch (e) {

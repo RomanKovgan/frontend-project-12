@@ -3,9 +3,10 @@ import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useApi } from '../../hooks/index';
 import { getChannelById } from '../../slices/selectors';
-import { useTranslation } from 'react-i18next';
 
 const renameChannelMadal = ({ handleClose }) => {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ const renameChannelMadal = ({ handleClose }) => {
       const data = { name, id: channelId };
       try {
         await api.renameChannel(data);
+        toast.success(t('modals.renamed'));
         handleClose();
       } catch (e) {
         inputRef.current.select();

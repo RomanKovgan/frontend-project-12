@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useApi } from '../../hooks';
 
 const RemoveChannelModal = ({ handleClose }) => {
@@ -12,6 +13,7 @@ const RemoveChannelModal = ({ handleClose }) => {
   const handleRemove = async () => {
     try {
       await api.removeChannel({ id: channelId });
+      toast.success(t('modals.removed'));
       handleClose();
     } catch (e) {
       console.log(e);

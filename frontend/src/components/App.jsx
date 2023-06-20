@@ -8,6 +8,7 @@ import {
   Outlet,
   Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import MainPage from './MainPage';
 import LoginPage from './LoginPage';
 import NavigateBar from './NavigateBar';
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<Registration />} />
         </Routes>
+        <ToastContainer autoClose={800} />
       </div>
     </Router>
   </AuthProvider>

@@ -1,7 +1,11 @@
 export default {
   translation: {
-    hexletChat: 'Hexlet Chat',
-    logOut: 'Выйти',
+    navbar: {
+      hexletChat: 'Hexlet Chat',
+      logOut: 'Выйти',
+      en: 'анг',
+      ru: 'рус',
+    },
     modals: {
       addChannel: 'Добавить канал',
       channelsName: 'Название канала',
@@ -13,6 +17,9 @@ export default {
       renameChannel: 'Переименовать канал',
       renameForm: 'Новое имя канала',
       rename: 'Переименовать',
+      removed: 'Канал удален',
+      renamed: 'Канал переименован',
+      created: 'Канал создан',
     },
     channels: {
       channelsControl: 'Управление каналом',
@@ -36,6 +43,10 @@ export default {
       password: 'Пароль',
       confirmation: 'Подтверждение пароля',
       submit: 'Зарегистрировать',
+    },
+    errors: {
+      unknown: 'Неизвестная ошибка',
+      network: 'Ошибка сети',
     },
   },
 };

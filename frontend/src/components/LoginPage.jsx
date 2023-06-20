@@ -1,3 +1,4 @@
+/* eslint-disable functional/no-conditional-statements */
 /* eslint-disable functional/no-expression-statements */
 
 import axios from 'axios';
@@ -8,6 +9,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useAuth } from '../hooks/index';
 import routes from '../routes';
 
@@ -32,12 +34,12 @@ const LoginPage = () => {
         auth.logIn(res.data);
         navigate('/', { replace: true });
       } catch (err) {
-        console.log(err);
         formik.setSubmitting(false);
-        if (err.isAxiosError && err.response.status === 401) {
+        if (err.isAxiosError && err.response?.status === 401) {
           setAuthFailed(true);
           inputRef.current.select();
-          return;
+        } else {
+          toast.error(t('errors.network'));
         }
         throw err;
       }
