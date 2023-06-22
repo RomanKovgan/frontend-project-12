@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import * as filter from 'leo-profanity';
 import { actions } from '../../slices';
 import { useApi } from '../../hooks/index';
 
@@ -26,9 +27,11 @@ const AddChannelModal = ({ handleClose }) => {
     },
     onSubmit: async (values) => {
       try {
+        filter.add(filter.getDictionary('ru'));
+        const filtredChannel = filter.clean(values.name);
         handleClose();
         toast.success(t('modals.created'));
-        const { id } = await api.createChannel(values);
+        const { id } = await api.createChannel({ name: filtredChannel });
         dispatch(actions.setCurrentChannel({ channelId: id }));
       } catch (e) {
         inputRef.current.select();

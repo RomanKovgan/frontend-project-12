@@ -47,7 +47,6 @@ const MainPage = () => {
     fetchData();
     return () => { didCancel = false; };
   }, [dispatch, auth, navigate, t]);
-  console.log(fetching);
 
   return fetching ? null : (
     <>
