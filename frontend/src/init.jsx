@@ -1,3 +1,5 @@
+/* eslint-disable functional/no-conditional-statements */
+/* eslint-disable functional/no-let */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable functional/no-expression-statements */
 import React from 'react';
@@ -28,6 +30,25 @@ const init = async () => {
 
   const socket = io();
 
+  const withAcknowledgement = (socketFunc) => (...args) => new Promise((resolve, reject) => {
+    let state = 'pending';
+    const timer = setTimeout(() => {
+      state = 'rejected';
+      reject();
+    }, 3000);
+
+    socketFunc(...args, (response) => {
+      if (state !== 'pending') return;
+      clearTimeout(timer);
+      if (response.status === 'ok') {
+        state = 'resolved';
+        resolve(response.data);
+      }
+
+      reject();
+    });
+  });
+
   socket.on('newMessage', (payload) => {
     store.dispatch(actions.addMessages({ message: payload }));
   });
@@ -47,21 +68,21 @@ const init = async () => {
     }));
   });
 
-  const sendMessage = (data) => {
-    socket.emit('newMessage', data);
-  };
+  const sendMessage = withAcknowledgement((...data) => {
+    socket.volatile.emit('newMessage', ...data);
+  });
 
-  const createChannel = (data) => {
-    socket.emit('newChannel', data);
-  };
+  const createChannel = withAcknowledgement((...data) => {
+    socket.volatile.emit('newChannel', ...data);
+  });
 
-  const removeChannel = (id) => {
-    socket.emit('removeChannel', id);
-  };
+  const removeChannel = withAcknowledgement((...data) => {
+    socket.volatile.emit('removeChannel', ...data);
+  });
 
-  const renameChannel = (data) => {
-    socket.emit('renameChannel', data);
-  };
+  const renameChannel = withAcknowledgement((...data) => {
+    socket.volatile.emit('renameChannel', ...data);
+  });
 
   const sockets = {
     sendMessage,

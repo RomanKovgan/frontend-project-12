@@ -29,7 +29,7 @@ const AddChannelModal = ({ handleClose }) => {
       name: '',
     },
     validationSchema: addChannelSchema(channels),
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setSubmitting }) => {
       try {
         filter.add(filter.getDictionary('ru'));
         const filtredChannel = filter.clean(values.name);
@@ -37,8 +37,10 @@ const AddChannelModal = ({ handleClose }) => {
         toast.success(t('modals.created'));
         const { id } = await api.createChannel({ name: filtredChannel });
         dispatch(actions.setCurrentChannel({ channelId: id }));
+        console.log(formik.isSubmitting);
       } catch (e) {
         inputRef.current.select();
+        setSubmitting(false);
       }
     },
     validateOnBlur: false,
@@ -59,7 +61,7 @@ const AddChannelModal = ({ handleClose }) => {
               onChange={formik.handleChange}
               value={formik.values.name}
               disabled={formik.isSubmitting}
-              isInvalid={(formik.errors.name && formik.touched.name) || formik.status}
+              isInvalid={(formik.errors.name && formik.touched.name) || !!formik.status}
               name="name"
               id="name"
             />
@@ -78,6 +80,7 @@ const AddChannelModal = ({ handleClose }) => {
                 variant="primary"
                 type="submit"
                 className="ms-2"
+                disabled={formik.isSubmitting}
               >
                 {t('submit')}
               </Button>
