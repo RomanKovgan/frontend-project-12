@@ -43,6 +43,7 @@ export default {
       messageCount_one: 'message',
       messageCount_other: 'messages',
       enterMessage: 'Enter your message...',
+      newMessage: 'New message',
     },
     registration: {
       registration: 'Registration',

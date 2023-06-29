@@ -45,6 +45,7 @@ export default {
       messageCount_few: 'сообщения',
       messageCount_many: 'сообщений',
       enterMessage: 'Введите сообщение...',
+      newMessage: 'Новое сообщение',
     },
     registration: {
       registration: 'Регистрация',

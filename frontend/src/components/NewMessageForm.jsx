@@ -47,6 +47,7 @@ const NewMessageForm = ({ channel }) => {
       <Form.Control
         name="body"
         placeholder={t('message.enterMessage')}
+        aria-label={t('message.newMessage')}
         ref={inputRef}
         onChange={f.handleChange}
         onBlur={f.handleBlur}
