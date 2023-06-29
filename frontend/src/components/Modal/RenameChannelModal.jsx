@@ -16,7 +16,7 @@ const renameChannelMadal = ({ handleClose }) => {
   const channel = useSelector(getChannelById(channelId));
 
   useEffect(() => {
-    inputRef.current.select();
+    setTimeout(() => inputRef.current.select()); 
   }, []);
 
   const formik = useFormik({
@@ -43,10 +43,11 @@ const renameChannelMadal = ({ handleClose }) => {
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label>{t('modals.renameForm')}</Form.Label>
+            <Form.Label className="visually-hidden">{t('modals.renameForm')}</Form.Label>
             <Form.Control
               name="name"
               id="name"
+              className="mb-2"
               ref={inputRef}
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -63,7 +64,7 @@ const renameChannelMadal = ({ handleClose }) => {
                 variant="primary"
                 type="submit"
               >
-                {t('modals.rename')}
+                {t('modals.submit')}
               </Button>
             </div>
           </Form.Group>

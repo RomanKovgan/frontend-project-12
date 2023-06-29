@@ -74,7 +74,7 @@ const AddChannelModal = ({ handleClose }) => {
                 type="button"
                 onClick={handleClose}
               >
-                {t('cancel')}
+                {t('modals.cancel')}
               </Button>
               <Button
                 variant="primary"
@@ -82,7 +82,7 @@ const AddChannelModal = ({ handleClose }) => {
                 className="ms-2"
                 disabled={formik.isSubmitting}
               >
-                {t('submit')}
+                {t('modals.submit')}
               </Button>
             </div>
           </Form.Group>
