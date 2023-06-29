@@ -15,7 +15,7 @@ export default {
       confirmation: 'Вы уверены?',
       delete: 'Удалить',
       renameChannel: 'Переименовать канал',
-      renameForm: 'Новое имя канала',
+      renameForm: 'Имя канала',
       rename: 'Переименовать',
       removed: 'Канал удалён',
       renamed: 'Канал переименован',
