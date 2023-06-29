@@ -55,7 +55,7 @@ const AddChannelModal = ({ handleClose }) => {
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>{t('channelsName')}</Form.Label>
+            <Form.Label>{t('modals.channelsName')}</Form.Label>
             <Form.Control
               ref={inputRef}
               onChange={formik.handleChange}

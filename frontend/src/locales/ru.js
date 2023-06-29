@@ -8,7 +8,7 @@ export default {
     },
     modals: {
       addChannel: 'Добавить канал',
-      channelsName: 'Название канала',
+      channelsName: 'Имя канала',
       cancel: 'Отменить',
       submit: 'Отправить',
       removeChannel: 'Удалить канал',
