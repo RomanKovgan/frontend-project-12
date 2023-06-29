@@ -100,7 +100,7 @@ const Registration = () => {
                   <Form.Label htmlFor="confirmPassword">{ t('registration.confirmation') }</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>{t(errors.confirmPassword)}</Form.Control.Feedback>
                 </Form.Group>
-                <Button type="button" variant="primary w-100" onClick={handleSubmit}>
+                <Button type="submit" variant="primary w-100" onClick={handleSubmit}>
                   { t('registration.submit') }
                 </Button>
               </Form>
