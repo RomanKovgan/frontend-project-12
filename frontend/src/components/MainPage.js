@@ -51,12 +51,12 @@ const MainPage = () => {
   return fetching ? null : (
     <>
       <Modal />
-      <div className="container h-100">
-        <div className="row h-100">
-          <div className="col-4 col-md-2 d-flex flex-column">
+      <div className="container h-100 shadow my-4 rounded overflow-hidden">
+        <div className="row h-100 bg-white flex-md-row">
+          <div className="col-4 col-md-3 border-end d-flex px-0  flex-column">
             <ChannelsList />
           </div>
-          <div className="col h-100">
+          <div className="col h-100 p-0">
             <MessageList />
           </div>
         </div>

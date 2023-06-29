@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statements */
 import React from 'react';
-import { Button, Navbar } from 'react-bootstrap';
+import { Button, ButtonGroup, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/index';
@@ -13,12 +13,12 @@ const NavigateBar = () => {
   const change = (lng) => i18n.changeLanguage(lng);
 
   return (
-    <Navbar bg="primary" expand="lg" variant="dark">
+    <Navbar bg="primary" expand="lg" variant="dark" className="justify-content-between">
       <Navbar.Brand as={Link} to="/">{t('navbar.hexletChat')}</Navbar.Brand>
-      <div>
+      <ButtonGroup className="border">
         <Button type="button" onClick={() => change('en')}>{t('navbar.en')}</Button>
         <Button type="button" onClick={() => change('ru')}>{t('navbar.ru')}</Button>
-      </div>
+      </ButtonGroup>
       {user && <Button onClick={logOut}>{t('navbar.logOut')}</Button>}
     </Navbar>
   );

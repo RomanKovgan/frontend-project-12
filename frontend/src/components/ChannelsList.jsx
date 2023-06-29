@@ -13,9 +13,9 @@ const Channel = ({
   channel, isCurrent, handleRemove, handleRename, handleChoose,
 }) => {
   const { t } = useTranslation();
-  const variant = isCurrent ? 'secondary' : null;
+  const variant = isCurrent ? 'info' : null;
   return (
-    <li key={channel.id} className="nav-item">
+    <li key={channel.id} className="nav-item w-100">
       {channel.removable
         ? (
           <Dropdown as={ButtonGroup} className="d-flex">
@@ -24,11 +24,12 @@ const Channel = ({
               onClick={handleChoose}
               variant={variant}
               type="button"
+              className="w-100 rounded-0 text-start text-truncate"
             >
-              <span>#</span>
+              <span className="me-1">#</span>
               {channel.name}
             </Button>
-            <Dropdown.Toggle split variant={variant}>
+            <Dropdown.Toggle split className="flex-grow-0" variant={variant}>
               <span className="visually-hidden">{t('channels.channelsControl')}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -42,8 +43,9 @@ const Channel = ({
             variant={variant}
             key={channel.id}
             onClick={handleChoose}
+            className="w-100 text-start rounded-0"
           >
-            <span>#</span>
+            <span className="me-1">#</span>
             {channel.name}
           </Button>
         )}
@@ -55,8 +57,7 @@ const ChannelsList = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const { channels, currentChannelsId } = useSelector((state) => state.channelsInfo);
-
+  const { channels, currentChannelId } = useSelector((state) => state.channelsInfo);
   const handleChooseChannel = (channelId) => () => {
     dispatch(actions.setCurrentChannel({ channelId }));
   };
@@ -71,22 +72,24 @@ const ChannelsList = () => {
   };
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <span>{t('channels.channels')}</span>
+      <div className="d-flex justify-content-between m-2  ps-4  pe-2 p-4">
+        <b>{t('channels.channels')}</b>
         <Button
           type="button"
           variant="group-vertical"
           onClick={handleAddChannel}
+          className="p-0 m-1 text-bg-primary"
         >
           <Plus />
+          <span className="visually-hidden">+</span>
         </Button>
       </div>
-      <ul className="nav flex-column h-100">
+      <ul className="nav flex-column nav-fill nav-pills ps-2 m-2 h-100 overflow-auto d-block">
         {channels.map((channel) => (
           <Channel
             key={channel.id}
             channel={channel}
-            isCurrent={channel.id === currentChannelsId}
+            isCurrent={channel.id === currentChannelId}
             handleChoose={handleChooseChannel(channel.id)}
             handleRename={handleRenameChannel}
             handleRemove={handleRemoveChannel}

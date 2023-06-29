@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks';
 import routes from '../routes';
-import { registrationShema } from '../schemas/index';
+import { registrationSchema } from '../schemas/index';
 
 const Registration = () => {
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ const Registration = () => {
         throw e;
       }
     },
-    validationSchema: registrationShema,
+    validationSchema: registrationSchema,
   });
 
   const {
@@ -68,7 +68,7 @@ const Registration = () => {
                     required
                   />
                   <Form.Label htmlFor="username">{ t('registration.username') }</Form.Label>
-                  <Form.Control.Feedback type="invalid" tooltip>{errors.username}</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid" tooltip>{t(errors.username)}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3 form-floating">
                   <Form.Control
@@ -83,7 +83,7 @@ const Registration = () => {
                     required
                   />
                   <Form.Label htmlFor="password">{ t('registration.password')}</Form.Label>
-                  <Form.Control.Feedback type="invalid" tooltip>{errors.password}</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid" tooltip>{t(errors.password)}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
@@ -98,7 +98,7 @@ const Registration = () => {
                     isInvalid={(errors.confirmPassword && touched.confirmPassword) || signupFailed}
                   />
                   <Form.Label htmlFor="confirmPassword">{ t('registration.confirmation') }</Form.Label>
-                  <Form.Control.Feedback type="invalid" tooltip>{errors.confirmPassword}</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid" tooltip>{t(errors.confirmPassword)}</Form.Control.Feedback>
                 </Form.Group>
                 <Button type="button" variant="primary w-100" onClick={handleSubmit}>
                   { t('registration.submit') }

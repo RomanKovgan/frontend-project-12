@@ -3,19 +3,22 @@
 /* eslint-disable functional/no-expression-statements */
 import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import * as filter from 'leo-profanity';
 import { actions } from '../../slices';
 import { useApi } from '../../hooks/index';
+import { addChannelSchema } from '../../schemas';
+import { getChannelsNames } from '../../slices/selectors';
 
 const AddChannelModal = ({ handleClose }) => {
+  const { t } = useTranslation();
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const api = useApi();
-  const { t } = useTranslation();
+  const channels = useSelector(getChannelsNames);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -25,6 +28,7 @@ const AddChannelModal = ({ handleClose }) => {
     initialValues: {
       name: '',
     },
+    validationSchema: addChannelSchema(channels),
     onSubmit: async (values) => {
       try {
         filter.add(filter.getDictionary('ru'));
@@ -37,12 +41,14 @@ const AddChannelModal = ({ handleClose }) => {
         inputRef.current.select();
       }
     },
+    validateOnBlur: false,
+    validateOnChange: false,
   });
 
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>{t('addChannel')}</Modal.Title>
+        <Modal.Title>{t('modals.addChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -52,10 +58,15 @@ const AddChannelModal = ({ handleClose }) => {
               ref={inputRef}
               onChange={formik.handleChange}
               value={formik.values.name}
+              disabled={formik.isSubmitting}
+              isInvalid={(formik.errors.name && formik.touched.name) || formik.status}
               name="name"
               id="name"
             />
-            <div className="d-flex justify-content-end">
+            <Form.Control.Feedback type="invalid">
+              {t(formik.errors.name) || t(formik.status)}
+            </Form.Control.Feedback>
+            <div className="d-flex justify-content-end pt-2">
               <Button
                 variant="secondary"
                 type="button"
@@ -66,6 +77,7 @@ const AddChannelModal = ({ handleClose }) => {
               <Button
                 variant="primary"
                 type="submit"
+                className="ms-2"
               >
                 {t('submit')}
               </Button>

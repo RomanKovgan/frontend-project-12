@@ -3,9 +3,11 @@
 import React, { useRef, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
 import * as filter from 'leo-profanity';
+import { ArrowRightCircleFill } from 'react-bootstrap-icons';
+import { useTranslation } from 'react-i18next';
 import { useApi, useAuth } from '../hooks/index';
+import { messageSchema } from '../schemas';
 
 const NewMessageForm = ({ channel }) => {
   const { t } = useTranslation();
@@ -16,6 +18,7 @@ const NewMessageForm = ({ channel }) => {
     initialValues: {
       body: '',
     },
+    validationSchema: messageSchema,
     onSubmit: async ({ body }) => {
       filter.add(filter.getDictionary('ru'));
       const cleanMessage = filter.clean(body);
@@ -32,6 +35,7 @@ const NewMessageForm = ({ channel }) => {
       }
       inputRef.current.focus();
     },
+    validateOnBlur: false,
   });
 
   useEffect(() => {
@@ -39,18 +43,26 @@ const NewMessageForm = ({ channel }) => {
   }, [channel]);
 
   return (
-    <Form onSubmit={f.handleSubmit}>
+    <Form noValidate onSubmit={f.handleSubmit} className="d-flex border rounded-2">
       <Form.Control
         name="body"
-        placeholder="Enter yuor message..."
+        placeholder={t('message.enterMessage')}
         ref={inputRef}
         onChange={f.handleChange}
+        onBlur={f.handleBlur}
+        disabled={f.isSubmitting}
         value={f.values.body}
+        className="border-0"
       />
-      <Button type="submit">
-        {t('message.submit')}
+      <Button
+        variant="group-vertical"
+        type="submit"
+        disabled={!f.isValid || !f.dirty}
+        className="border-0"
+      >
+        <ArrowRightCircleFill size={20} />
+        <span className="visually-hidden">{t('message.submit')}</span>
       </Button>
-
     </Form>
   );
 };

@@ -20,6 +20,10 @@ export default {
       removed: 'Channel removed',
       renamed: 'Channel renamed',
       created: 'Channel created',
+      min: 'Must be 3 to 20 characters',
+      max: 'Must be 3 to 20 characters',
+      unique: 'Must be unique',
+      required: 'Must be required',
     },
     channels: {
       channelsControl: 'Channels control',
@@ -36,6 +40,9 @@ export default {
     },
     message: {
       submit: 'Submit',
+      messageCount_one: 'message',
+      messageCount_other: 'messages',
+      enterMessage: 'Enter your message...',
     },
     registration: {
       registration: 'Registration',
@@ -43,10 +50,19 @@ export default {
       password: 'Password',
       confirmation: 'Confirm password',
       submit: 'Register',
+      usernamePattern: 'must be 3 to 20 characters',
+      passMin: 'passMin 6 characters',
+      passMustMatch: 'Passwords must match',
+      require: 'Required',
     },
     errors: {
       unknown: 'Unknown error',
       network: 'Network error',
+    },
+    errorPage: {
+      header: 'Oops! Page not found',
+      message: 'You can go ',
+      linkMain: 'to the main page',
     },
   },
 };

@@ -7,21 +7,43 @@ const loginSchema = yup.object({
     .required('Required'),
 });
 
-const registrationShema = yup.object().shape({
+const registrationSchema = yup.object().shape({
   username: yup
     .string()
     .trim()
-    .required('required')
-    .min(3, 'must be 3 to 20 characters')
-    .max(20, 'must be 3 to 20 characters'),
+    .required('registration.required')
+    .min(3, 'registration.usernamePattern')
+    .max(20, 'registration.usernamePattern'),
   password: yup
     .string()
     .trim()
-    .required('required')
-    .min(6, 'passMin 6 characters'),
+    .required('registration.required')
+    .min(6, 'registration.passMin'),
   confirmPassword: yup
     .string()
-    .test('confirmPassword', 'mustMatch', (value, context) => value === context.parent.password),
+    .test('confirmPassword', 'registration.passMustMatch', (value, context) => value === context.parent.password),
 });
 
-export { registrationShema, loginSchema };
+const messageSchema = yup.object().shape({
+  body: yup
+    .string()
+    .trim()
+    .required('Required'),
+});
+
+const addChannelSchema = (channels) => yup.object().shape({
+  name: yup
+    .string()
+    .trim()
+    .required('modals.required')
+    .min(3, 'modals.min')
+    .max(20, 'modals.max')
+    .notOneOf(channels, 'modals.unique'),
+});
+
+export {
+  registrationSchema,
+  loginSchema,
+  messageSchema,
+  addChannelSchema,
+};
