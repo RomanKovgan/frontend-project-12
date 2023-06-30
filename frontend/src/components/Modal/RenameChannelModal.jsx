@@ -51,7 +51,7 @@ const renameChannelMadal = ({ handleClose }) => {
               value={formik.values.name}
               onChange={formik.handleChange}
             />
-            <label className="visually-hidden" htmlFor="name">{t('modals.rename')}</label>
+            <label className="visually-hidden" htmlFor="name">{t('modals.renameForm')}</label>
             <Form.Control.Feedback type="invalid">
               {t(formik.errors.name) || t(formik.status)}
             </Form.Control.Feedback>
