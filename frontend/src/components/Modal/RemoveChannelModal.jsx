@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';

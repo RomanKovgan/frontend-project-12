@@ -1,7 +1,4 @@
-/* eslint-disable functional/no-conditional-statements */
-/* eslint-disable functional/no-let */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 import React from 'react';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';

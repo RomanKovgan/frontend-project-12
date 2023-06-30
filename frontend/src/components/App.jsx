@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,

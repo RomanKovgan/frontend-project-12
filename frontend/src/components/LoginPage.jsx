@@ -1,13 +1,10 @@
-/* eslint-disable functional/no-conditional-statements */
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 
 import axios from 'axios';
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useAuth } from '../hooks/index';

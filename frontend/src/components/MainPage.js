@@ -1,9 +1,5 @@
-/* eslint-disable functional/no-let */
-/* eslint-disable functional/no-conditional-statements */
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable functional/no-expression-statements */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable */
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';

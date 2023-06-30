@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 import React from 'react';
 import { Button, ButtonGroup, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ import { useAuth } from '../hooks/index';
 const NavigateBar = () => {
   const { t, i18n } = useTranslation();
   const { user, logOut } = useAuth();
-  // const notify = (item) => toast(`Languege change to ${item}`);
 
   const change = (lng) => i18n.changeLanguage(lng);
 

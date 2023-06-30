@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

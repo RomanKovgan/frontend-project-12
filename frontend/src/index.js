@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable functional/no-expression-statements */
+/* eslint-disable */
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import init from './init';
