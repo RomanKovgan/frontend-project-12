@@ -37,6 +37,7 @@ export default {
       submit: 'Войти',
       registration: 'Регистрация',
       error: 'Неверные имя пользователя или пароль',
+      login: 'Войти',
     },
     message: {
       submit: 'Отправить',
@@ -57,6 +58,7 @@ export default {
       passMin: 'Не менее 6 символов',
       passMustMatch: 'Пароли должны совпадать',
       required: 'Обязательное поле',
+      alreadyExists: 'Пользователь с таким именем уже существует',
     },
     errors: {
       unknown: 'Неизвестная ошибка',

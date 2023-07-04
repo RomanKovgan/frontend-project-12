@@ -21,7 +21,7 @@ export const slice = createSlice({
     })
     .addCase(channelsInfoActions.removeChannel, (state, { payload }) => {
       const { channelId } = payload;
-      const filtredMessages = state.messages.filter((message) => message.channelId === channelId);
+      const filtredMessages = state.messages.filter((message) => message.channelId !== channelId);
       state.messages = filtredMessages;
     }),
 });

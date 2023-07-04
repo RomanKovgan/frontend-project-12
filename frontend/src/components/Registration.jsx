@@ -59,30 +59,32 @@ const Registration = () => {
                   <Form.Control
                     onChange={handleChange}
                     value={values.username}
-                    placeholder="username"
+                    placeholder={t('registration.username')}
                     name="username"
                     id="username"
                     ref={inputRef}
                     autoComplete="username"
                     isInvalid={(errors.username && touched.username) || signupFailed}
                     required
+                    
                   />
-                  <Form.Label htmlFor="username">{ t('registration.username') }</Form.Label>
-                  <Form.Control.Feedback type="invalid" tooltip>{t(errors.username)}</Form.Control.Feedback>
+                  <Form.Label htmlFor="username">{t('registration.username')}</Form.Label>
+                  <Form.Control.Feedback type="invalid" tooltip>{signupFailed ? t('registration.alreadyExists') : t(errors.username)}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3 form-floating">
                   <Form.Control
                     type="password"
                     onChange={handleChange}
                     value={values.password}
-                    placeholder="password"
+                    placeholder={t('registration.password')}
                     name="password"
                     id="password"
                     autoComplete="new-password"
                     isInvalid={(errors.password && touched.password) || signupFailed}
                     required
+                    
                   />
-                  <Form.Label htmlFor="password">{ t('registration.password')}</Form.Label>
+                  <Form.Label htmlFor="password">{t('registration.password')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>{t(errors.password)}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="form-floating mb-3">
@@ -90,14 +92,14 @@ const Registration = () => {
                     type="password"
                     onChange={handleChange}
                     value={values.confirmPassword}
-                    placeholder="Confirm password"
+                    placeholder={t('registration.confirmation')}
                     name="confirmPassword"
                     id="confirmPassword"
                     autoComplete="new-password"
                     required
                     isInvalid={(errors.confirmPassword && touched.confirmPassword) || signupFailed}
                   />
-                  <Form.Label htmlFor="confirmPassword">{ t('registration.confirmation') }</Form.Label>
+                  <Form.Label htmlFor="confirmPassword">{t('registration.confirmation')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip>{t(errors.confirmPassword)}</Form.Control.Feedback>
                 </Form.Group>
                 <Button type="submit" variant="primary w-100" onClick={handleSubmit}>

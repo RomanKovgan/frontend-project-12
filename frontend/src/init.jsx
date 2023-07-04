@@ -65,20 +65,21 @@ const init = async () => {
     }));
   });
 
-  const sendMessage = withAcknowledgement((...data) => {
-    socket.volatile.emit('newMessage', ...data);
+  const sendMessage = withAcknowledgement((message, cb) => {
+    socket.volatile.emit('newMessage', message, cb);
   });
 
-  const createChannel = withAcknowledgement((...data) => {
-    socket.volatile.emit('newChannel', ...data);
+  const createChannel = withAcknowledgement((channel, cb) => {
+    socket.volatile.emit('newChannel', channel, cb);
   });
 
-  const removeChannel = withAcknowledgement((...data) => {
-    socket.volatile.emit('removeChannel', ...data);
+  const removeChannel = withAcknowledgement((id, cb) => {
+    socket.volatile.emit('removeChannel', id, cb);
+    console.log(id);
   });
 
-  const renameChannel = withAcknowledgement((...data) => {
-    socket.volatile.emit('renameChannel', ...data);
+  const renameChannel = withAcknowledgement((newChannelName, cb) => {
+    socket.volatile.emit('renameChannel', newChannelName, cb);
   });
 
   const sockets = {
@@ -87,12 +88,6 @@ const init = async () => {
     removeChannel,
     renameChannel,
   };
-  await i18n
-    .use(initReactI18next)
-    .init({
-      resources,
-      fallbackLng: 'ru',
-    });
 
   return (
     <RollbarProvider config={rollbarConfig}>

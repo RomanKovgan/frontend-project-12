@@ -37,6 +37,7 @@ export default {
       submit: 'Submit',
       registration: 'Registration',
       error: 'username or password are incorrect',
+      login: 'Login',
     },
     message: {
       submit: 'Submit',
@@ -55,6 +56,7 @@ export default {
       passMin: 'passMin 6 characters',
       passMustMatch: 'Passwords must match',
       require: 'Required',
+      alreadyExists: 'User with the same name already exists',
     },
     errors: {
       unknown: 'Unknown error',
