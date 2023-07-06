@@ -9,6 +9,7 @@ import resources from './locales/index';
 import store, { actions } from './slices/index';
 import App from './components/App';
 import { ApiContext } from './context/index';
+import * as filter from 'leo-profanity';
 
 const rollbarConfig = {
   accessToken: process.env.REACT_APP_ROLLBAR_TOKEN,
@@ -17,6 +18,7 @@ const rollbarConfig = {
 
 const init = async () => {
   const i18n = i18next.createInstance();
+  filter.add(filter.getDictionary('ru'));
 
   await i18n
     .use(initReactI18next)

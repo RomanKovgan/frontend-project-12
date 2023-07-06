@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -6,6 +7,7 @@ import {
   Route,
   Outlet,
   Navigate,
+  useNavigate,
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import MainPage from './MainPage';
@@ -15,8 +17,10 @@ import { AuthContext } from '../context/index';
 import Registration from './Registration';
 import ErrorPage from './ErrorPage';
 import { useAuth } from '../hooks';
+import routes from '../routes';
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const loginedUser = JSON.parse(localStorage.getItem('userId'));
   const currentUser = loginedUser ? { username: loginedUser.username } : null;
   const [user, setUser] = useState(currentUser);
@@ -27,7 +31,9 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = () => {
     localStorage.removeItem('userId');
+    navigate(routes.loginPagePath());
     setUser(null);
+    
   };
 
   const getAuthHeader = () => {
@@ -53,26 +59,26 @@ const AuthProvider = ({ children }) => {
 
 const PrivateOutlet = () => {
   const auth = useAuth();
-  return auth.user ? <Outlet /> : <Navigate to="/login" />;
+  return auth.user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />;
 };
 
 const App = () => (
-  <AuthProvider>
-    <Router>
+  <Router>
+    <AuthProvider>
       <div className="d-flex flex-column h-100">
         <NavigateBar />
         <Routes>
-          <Route path="/" element={<PrivateOutlet />}>
+          <Route path={routes.mainPagePath()} element={<PrivateOutlet />}>
             <Route path="" element={<MainPage />} />
           </Route>
-          <Route path="*" element={<ErrorPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<Registration />} />
+          <Route path={routes.errorPagePath()} element={<ErrorPage />} />
+          <Route path={routes.loginPagePath()} element={<LoginPage />} />
+          <Route path={routes.signupPAgePath()} element={<Registration />} />
         </Routes>
         <ToastContainer autoClose={800} />
       </div>
-    </Router>
-  </AuthProvider>
+    </AuthProvider>
+  </Router>
 );
 
 export default App;

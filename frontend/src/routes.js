@@ -4,4 +4,8 @@ export default {
   loginPath: () => [apiPath, 'login'].join('/'),
   dataPath: () => [apiPath, 'data'].join('/'),
   signupPath: () => [apiPath, 'signup'].join('/'),
+  mainPagePath: () => ('/'),
+  loginPagePath: () => ('/login'),
+  signupPAgePath: () => ('/signup'),
+  errorPagePath: () => ('*'),
 };

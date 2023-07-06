@@ -19,7 +19,6 @@ const NewMessageForm = ({ channel }) => {
     },
     validationSchema: messageSchema,
     onSubmit: async ({ body }) => {
-      filter.add(filter.getDictionary('ru'));
       const cleanMessage = filter.clean(body);
       const message = {
         body: cleanMessage,

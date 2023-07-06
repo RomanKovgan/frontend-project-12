@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +18,6 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
   const [fetching, setFetching] = useState(true);
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const MainPage = () => {
           return;
         }
         if (err.response.status === 401) {
-          navigate('/login');
+          auth.logOut();
         } else {
           toast.error(t('errors.network'));
         }
@@ -42,7 +41,7 @@ const MainPage = () => {
     };
     fetchData();
     return () => { didCancel = false; };
-  }, [dispatch, auth, navigate, t]);
+  }, [dispatch, auth, t]);
 
   return fetching ? null : (
     <>

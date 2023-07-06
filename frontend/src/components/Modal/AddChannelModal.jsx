@@ -29,7 +29,6 @@ const AddChannelModal = ({ handleClose }) => {
     validationSchema: addChannelSchema(channels),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        filter.add(filter.getDictionary('ru'));
         const filtredChannel = filter.clean(values.name);
         handleClose();
         toast.success(t('modals.created'));
